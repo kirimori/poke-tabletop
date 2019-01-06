@@ -12,4 +12,8 @@ func TestGetPokemon(t *testing.T) {
 	pokemon, err := GetPokemon(name)
 	require.NoError(t, err)
 	assert.Equal(t, name, pokemon.Name)
+
+	name = "missingno"
+	pokemon, err = GetPokemon(name)
+	assert.Error(t, err)
 }
