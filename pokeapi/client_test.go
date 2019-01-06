@@ -16,4 +16,8 @@ func TestGetPokemon(t *testing.T) {
 	name = "missingno"
 	pokemon, err = GetPokemon(name)
 	assert.Error(t, err)
+
+	name = ""
+	pokemon, err = GetPokemon(name)
+	assert.Error(t, err)
 }
