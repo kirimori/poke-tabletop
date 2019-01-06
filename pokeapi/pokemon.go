@@ -32,9 +32,9 @@ type Pokemon struct {
 			VersionGroup    Link `json:"version_group"`
 		} `json:"version_group_details"`
 	} `json:"moves"`
-	Name    string `json:"name"`
-	Order   int    `json:"order"`
-	Species Link   `json:"species"`
+	Name    string      `json:"name"`
+	Order   int         `json:"order"`
+	Species SpeciesLink `json:"species"`
 	Sprites struct {
 		BackDefault      string `json:"back_default"`
 		BackFemale       string `json:"back_female"`
