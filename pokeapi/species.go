@@ -30,14 +30,12 @@ func (sl SpeciesLink) Get() (s Species, err error) {
 
 // Species is details about a pokemon species
 type Species struct {
-	BaseHappiness  int    `json:"base_happiness"`
-	CaptureRate    int    `json:"capture_rate"`
-	Color          Link   `json:"color"`
-	EggGroups      []Link `json:"egg_groups"`
-	EvolutionChain struct {
-		URL string `json:"url"`
-	} `json:"evolution_chain"`
-	EvolvesFromSpecies Link `json:"evolves_from_species"`
+	BaseHappiness      int    `json:"base_happiness"`
+	CaptureRate        int    `json:"capture_rate"`
+	Color              Link   `json:"color"`
+	EggGroups          []Link `json:"egg_groups"`
+	EvolutionChain     Link   `json:"evolution_chain"`
+	EvolvesFromSpecies Link   `json:"evolves_from_species"`
 	FlavorTextEntries  []struct {
 		FlavorText string `json:"flavor_text"`
 		Language   Link   `json:"language"`
