@@ -40,9 +40,12 @@ func TestSpeciesLinkGet(t *testing.T) {
 
 	for _, test := range tt {
 		t.Run(test.name, func(t *testing.T) {
-			species, err := SpeciesLink{
-				URL: test.url,
-			}.Get()
+			sl := SpeciesLink{
+				Link: Link{
+					URL: test.url,
+				},
+			}
+			species, err := sl.Get()
 
 			if test.expectErr {
 				assert.Error(t, err)

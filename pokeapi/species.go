@@ -1,41 +1,24 @@
 package pokeapi
 
-import (
-	"errors"
-	"fmt"
-	"strconv"
-	"strings"
-)
-
 // SpeciesLink is a link to a pokemon species
-type SpeciesLink Link
+type SpeciesLink struct {
+	Link
+}
 
 // Get retrieves the pokemon species from the link
-func (sl SpeciesLink) Get() (s Species, err error) {
-	if len(sl.URL) == 0 {
-		return s, errors.New("URL was not initialized for species link retrieval")
-	}
-	split := strings.Split(sl.URL, "/")
-	split = removeEmptyStrings(split)
-	if len(split) != 6 || split[4] != "pokemon-species" {
-		return s, fmt.Errorf("URL had an unexpected format: %s", sl.URL)
-	}
-	pokeNumber := split[5]
-	num, err := strconv.Atoi(pokeNumber)
-	if err != nil {
-		return s, err
-	}
-	return GetSpecies(num)
+func (sl *SpeciesLink) Get() (s Species, err error) {
+	err = sl.Link.Get(&s)
+	return s, err
 }
 
 // Species is details about a pokemon species
 type Species struct {
-	BaseHappiness      int    `json:"base_happiness"`
-	CaptureRate        int    `json:"capture_rate"`
-	Color              Link   `json:"color"`
-	EggGroups          []Link `json:"egg_groups"`
-	EvolutionChain     Link   `json:"evolution_chain"`
-	EvolvesFromSpecies Link   `json:"evolves_from_species"`
+	BaseHappiness      int                `json:"base_happiness"`
+	CaptureRate        int                `json:"capture_rate"`
+	Color              Link               `json:"color"`
+	EggGroups          []Link             `json:"egg_groups"`
+	EvolutionChain     EvolutionChainLink `json:"evolution_chain"`
+	EvolvesFromSpecies SpeciesLink        `json:"evolves_from_species"`
 	FlavorTextEntries  []struct {
 		FlavorText string `json:"flavor_text"`
 		Language   Link   `json:"language"`
@@ -72,7 +55,7 @@ type Species struct {
 	} `json:"pokedex_numbers"`
 	Shape     Link `json:"shape"`
 	Varieties []struct {
-		IsDefault bool `json:"is_default"`
-		Pokemon   Link `json:"pokemon"`
+		IsDefault bool        `json:"is_default"`
+		Pokemon   PokemonLink `json:"pokemon"`
 	} `json:"varieties"`
 }
