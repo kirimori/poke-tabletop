@@ -41,4 +41,14 @@ func TestPokemonLinkIntegration(t *testing.T) {
 	species, err := pokemon.Species.Get()
 	require.NoError(t, err)
 	assert.Equal(t, name, species.Name)
+
+	evChain, err := species.EvolutionChain.Get()
+	require.NoError(t, err)
+
+	pichuSpecies, err := species.EvolvesFromSpecies.Get()
+	require.NoError(t, err)
+	otherEVChain, err := pichuSpecies.EvolutionChain.Get()
+	require.NoError(t, err)
+
+	assert.Equal(t, evChain, otherEVChain)
 }

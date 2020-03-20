@@ -1,5 +1,16 @@
 package pokeapi
 
+// PokemonLink is a link to a pokemon
+type PokemonLink struct {
+	Link
+}
+
+// Get retrieves the pokemon from the link
+func (pl *PokemonLink) Get() (p Pokemon, err error) {
+	err = pl.Link.Get(&p)
+	return p, err
+}
+
 // Pokemon is the return object for retrieving a pokemon by name
 type Pokemon struct {
 	Abilities []struct {
